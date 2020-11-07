@@ -12,19 +12,7 @@ class ViewController: UITableViewController {
   // MARK: - Property
   let cellId = "cellId"
   
-  let names = [
-    "Amy", "Bill", "Zack", "Steve", "Jack", "Jill", "Mary"
-  ]
-  
-  let cNames = [
-    "Carl", "Chris", "Christina", "Cameron"
-  ]
-  
-  let dNames = [
-    "David", "Dan"
-  ]
-  
-  let twoDimensionalArray = [
+  var twoDimensionalArray = [
     ["Amy", "Bill", "Zack", "Steve", "Jack", "Jill", "Mary"],
     ["Carl", "Chris", "Christina", "Cameron"],
     ["David", "Dan"],
@@ -66,12 +54,41 @@ class ViewController: UITableViewController {
     tableView.reloadRows(at: indexPathsToReload, with: animationStyle)
   }
   
+  @objc func handleExpandClose(button: UIButton) {
+    print("Trying to expand and close section...")
+    let section = button.tag
+    var indexPaths = [IndexPath]()
+    
+    for row in twoDimensionalArray[section].indices {
+      print(0, row)
+      let indexPath = IndexPath(row: row, section: section)
+      indexPaths.append(indexPath)
+    }
+    
+    twoDimensionalArray[section].removeAll()
+    tableView.deleteRows(at: indexPaths, with: .fade)
+  }
+  
   // MARK: - UITableView Delegate Methods
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let label = UILabel()
-    label.text = "Header"
-    label.backgroundColor = UIColor.lightGray
-    return label
+    let button = UIButton(type: .system)
+    button.setTitle("Close", for: .normal)
+    button.setTitleColor(.black, for: .normal)
+    button.backgroundColor = .yellow
+    button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+    button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+    button.tag = section
+    
+    return button
+    
+//    let label = UILabel()
+//    label.text = "Header"
+//    label.backgroundColor = UIColor.lightGray
+//    return label
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 34
   }
   
   // MARK: - UITableView DataSource Methods
