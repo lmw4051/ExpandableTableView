@@ -12,7 +12,22 @@ class ViewController: UITableViewController {
   let cellId = "cellId"
   
   let names = [
-    "Amy", "Bill", "Zack", "Steve", "Jack"
+    "Amy", "Bill", "Zack", "Steve", "Jack", "Jill", "Mary"
+  ]
+  
+  let cNames = [
+    "Carl", "Chris", "Christina", "Cameron"
+  ]
+  
+  let dNames = [
+    "David", "Dan"
+  ]
+  
+  let twoDimensionalArray = [
+    ["Amy", "Bill", "Zack", "Steve", "Jack", "Jill", "Mary"],
+    ["Carl", "Chris", "Christina", "Cameron"],
+    ["David", "Dan"],
+    ["Patrick", "Patty"]
   ]
   
   override func viewDidLoad() {
@@ -24,13 +39,24 @@ class ViewController: UITableViewController {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
   }
   
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let label = UILabel()
+    label.text = "Header"
+    label.backgroundColor = UIColor.lightGray
+    return label
+  }
+  
+  override func numberOfSections(in tableView: UITableView) -> Int {
+    return twoDimensionalArray.count
+  }
+  
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return names.count
+    return twoDimensionalArray[section].count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-    let name = self.names[indexPath.row]
+    let name = twoDimensionalArray[indexPath.section][indexPath.row]
     cell.textLabel?.text = name
     return cell
   }
