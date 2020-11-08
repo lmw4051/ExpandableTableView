@@ -13,10 +13,10 @@ class ViewController: UITableViewController {
   let cellId = "cellId"
   
   var twoDimensionalArray = [
-    ["Amy", "Bill", "Zack", "Steve", "Jack", "Jill", "Mary"],
-    ["Carl", "Chris", "Christina", "Cameron"],
-    ["David", "Dan"],
-    ["Patrick", "Patty"]
+    ExpandableNames(isExpanded: true, names: ["Amy", "Bill", "Zack", "Steve", "Jack", "Jill", "Mary"]),
+    ExpandableNames(isExpanded: true, names: ["Carl", "Chris", "Christina", "Cameron"]),
+    ExpandableNames(isExpanded: true, names: ["David", "Dan"]),
+    ExpandableNames(isExpanded: true, names: ["Patrick", "Patty"]),
   ]
   
   var showIndexPaths = false
@@ -24,7 +24,6 @@ class ViewController: UITableViewController {
   // MARK: - Life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show IndexPath", style: .plain, target: self, action: #selector(handleShowIndexPath))
     
     navigationItem.title = "Contacts"
@@ -40,7 +39,7 @@ class ViewController: UITableViewController {
     var indexPathsToReload = [IndexPath]()
     
     for section in twoDimensionalArray.indices {
-      for row in twoDimensionalArray[section].indices {
+      for row in twoDimensionalArray[section].names.indices {
         print(section, row)
         let indexPath = IndexPath(row: row, section: section)
         indexPathsToReload.append(indexPath)
@@ -59,14 +58,22 @@ class ViewController: UITableViewController {
     let section = button.tag
     var indexPaths = [IndexPath]()
     
-    for row in twoDimensionalArray[section].indices {
+    for row in twoDimensionalArray[section].names.indices {
       print(0, row)
       let indexPath = IndexPath(row: row, section: section)
       indexPaths.append(indexPath)
     }
     
-    twoDimensionalArray[section].removeAll()
-    tableView.deleteRows(at: indexPaths, with: .fade)
+    let isExpanded = twoDimensionalArray[section].isExpanded
+    twoDimensionalArray[section].isExpanded = !isExpanded
+    
+    button.setTitle(isExpanded ? "Open" : "Close", for: .normal)
+    
+    if isExpanded {
+      tableView.deleteRows(at: indexPaths, with: .fade)
+    } else {
+      tableView.insertRows(at: indexPaths, with: .fade)
+    }
   }
   
   // MARK: - UITableView Delegate Methods
@@ -97,12 +104,16 @@ class ViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return twoDimensionalArray[section].count
+    if !twoDimensionalArray[section].isExpanded {
+      return 0
+    }
+    
+    return twoDimensionalArray[section].names.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-    let name = twoDimensionalArray[indexPath.section][indexPath.row]
+    let name = twoDimensionalArray[indexPath.section].names[indexPath.row]
     cell.textLabel?.text = name
     
     if showIndexPaths {

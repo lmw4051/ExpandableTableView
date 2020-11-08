@@ -12,6 +12,7 @@
 		545999102556CB2500C866B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5459990E2556CB2500C866B9 /* Main.storyboard */; };
 		545999122556CB2700C866B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 545999112556CB2700C866B9 /* Assets.xcassets */; };
 		545999152556CB2700C866B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 545999132556CB2700C866B9 /* LaunchScreen.storyboard */; };
+		5459991F2556E83600C866B9 /* ExpandableNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5459991E2556E83600C866B9 /* ExpandableNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		545999112556CB2700C866B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		545999142556CB2700C866B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		545999162556CB2700C866B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5459991E2556E83600C866B9 /* ExpandableNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				5459990A2556CB2500C866B9 /* AppDelegate.swift */,
 				5459990C2556CB2500C866B9 /* ViewController.swift */,
+				5459991E2556E83600C866B9 /* ExpandableNames.swift */,
 				5459990E2556CB2500C866B9 /* Main.storyboard */,
 				545999112556CB2700C866B9 /* Assets.xcassets */,
 				545999132556CB2700C866B9 /* LaunchScreen.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5459991F2556E83600C866B9 /* ExpandableNames.swift in Sources */,
 				5459990D2556CB2500C866B9 /* ViewController.swift in Sources */,
 				5459990B2556CB2500C866B9 /* AppDelegate.swift in Sources */,
 			);
